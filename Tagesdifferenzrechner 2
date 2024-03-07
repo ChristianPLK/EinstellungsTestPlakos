@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+  Leider war ich gestern nicht so gut auf die Aufgabe vorbereitet. Hier ist nochmal eine andere Version, die ich in Javascript und HTML erstellt habe.
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Christian Pahlke"
+    <title>Tagesdifferenzrechner</title>
+
+</head>
+
+<body>
+    <h1>Tagesdifferenzrechner</h1>
+    <p>Tragen sie nacheinander Tag Monat und Jahr ein.</p><br><br>
+
+    <p>Tragen sie hier den ersten Tag ein:</p>
+    <form>
+        <input type="date" id="tag1" name="erster"><br>
+    </form>
+
+    <p>Tragen sie hier den zweiten Tag ein:</p>
+    <form>
+        <input type="date" id="tag2" name="zweiter"><br><br>
+    </form>
+
+    <button onclick="tageErrechnen()">Berechne</button>
+
+    <p id="ergebnis"></p>
+
+    <script>
+        function tageErrechnen() {
+            //Tage werden aus den Nutzer Eingaben als Strings eingelesen
+            let tag1 = document.getElementById("tag1").value;
+            let tag2 = document.getElementById("tag2").value;
+
+            if (tag1 == '' || tag2 == '') {
+                alert("Bitte alle Daten angeben!");
+            }
+
+            //Die Strings werden anhand des Trennstriches geteilt.
+            //Aus den Arrays werden dann die Tage Monate und Jahre in Datum-Objekte gespeichert.
+            let t1 = tag1.split('-');
+            let t2 = tag2.split('-');
+            let date1 = new Date(t1[0], t1[1], t1[2]);
+            let date2 = new Date(t2[0], t2[1], t2[2]);
+
+            //Die Zeitpunkte sind in den Objekten in der Einheit Millisekunden gespeicher, deshalb werden sie zu Tagen umgerechnet.
+            var differenz = (date2 - date1) / (1000 * 60 * 60 * 24);
+
+            console.log(date1);
+            console.log(date2);
+
+            console.log(differenz);
+
+            //In der HTML Datei soll der zu erst leere Parapraph mit dem Ergebnis der Rechnung gefüllt werden.
+            document.getElementById("ergebnis").innerHTML = "Das Ergenbnis lautet: " + differenz;
+        }
+    </script>
+</body>
+
+</html>
